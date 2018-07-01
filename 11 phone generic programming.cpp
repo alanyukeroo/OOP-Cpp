@@ -6,6 +6,8 @@
 #include<map>
 #include <vector>
 #include<string>
+
+#include <ctime>
 #include<typeinfo>
 #include <stdlib.h>
 using namespace std;
@@ -67,8 +69,31 @@ class Handphone {
 	int price;
 	int stocks;
 };
+//function to random string and int
+static const char alphanum[] =
+"0123456789"
+"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+"abcdefghijklmnopqrstuvwxyz";
+
+static const char num[] =
+"0123456789";
+
+int stringLength = sizeof(alphanum) - 1;
+
+char genRandom(int i)
+{
+	if (i ==0){
+    return alphanum[rand() % stringLength];
+    
+	}else if(i ==1){
+		 return num[rand() % stringLength];
+	}
+}
+//End of function random
+
 //var index phone
 int sum=3;
+//func to save kategoty import or local
 bool jenis(int x);
 vector<Handphone> hp_import;
 //vector<handphone> hp_lokal;
@@ -137,7 +162,7 @@ void menuUtama(){
 			break;
 		}
 }
-
+//function to initialitation data
 void initData (vector<Handphone>& newPhone){
 	if(konter.getStatus()==0){
 		Handphone newPhon("BLACKBERRY",20000000,20,"YZUIQ");
@@ -217,9 +242,22 @@ void insertPhone(bool x,vector<Handphone>& newPhone){
         cin >> stok; 
     } while(stok < 5 or stok > 100);
     if(x ==0){
+    	srand(time(0));
+	    string Str;
+	    for(unsigned int i = 0; i < 6; ++i)
+	    {
+	    	randomString += genRandom(x);
+	    }
+	    
     	Handphone newPhon(nama,harga,stok,randomString);
 		newPhone.push_back(newPhon);
 	}else if(x==1){
+		srand(time(0));
+	    string Str;
+	    for(unsigned int i = 0; i < 6; ++i)
+	    {
+	    	randomString += genRandom(x);
+	    }
 		Handphone newPhon(nama,harga,stok,randomString);
 		newPhone.push_back(newPhon);	
 	}
